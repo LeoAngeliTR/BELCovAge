@@ -41,5 +41,6 @@ To replicate the study results:
 3. Run `preliminary.R` to install required packages.
 4. Execute `wave_specific_an.R` and `long_analysis_BE.R` sequentially to generate the results and plots as described in the manuscript.
 5. If you are just interested in the final results, it is sufficient to run `long_analysis_BE.R`, which will automatically run all the dependencies.
+6. Expected run time: 13 mins
 ## Contact
 For issues, questions, or contributions, please open an issue on this GitHub repository or contact the repository maintainers directly.
