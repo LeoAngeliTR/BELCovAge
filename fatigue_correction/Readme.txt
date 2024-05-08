@@ -1,0 +1,4 @@
+The .csv tables contain estimates of social contact matrices for each wave of surveys (CoMix [1]). The antrates of these matrices are defined as m_ij =c_ij x N_j, where c_ij is the daily rate of contact between group i and group j and N_j is the number of individuals in age group j. 
+
+The matrices are evaluated both with and without (reci) reciprocity of contacts constraint, i.e. c_ij*N_j=c_ji*N_i, and both with ('_f' files) and without correction for fatigue effect (Loedy, N., Coletti, P., Wambua, J. et al. Longitudinal social contact data analysis: insights from 2 years of data collection in Belgium during the COVID-19 pandemic. BMC Public Health 23, 1298 (2023). https://doi.org/10.1186/s12889-023-16193-7)
+ 
