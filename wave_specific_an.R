@@ -222,7 +222,7 @@ for(wave in wrange){
   q_factor_sym[[cicle]] <- q_sym
   
   ##for plots
-  wave_title <- toString(waves)
+  wave_title <- toString(wave)
   
   ##Beta-Matrices composed by transmission terms
   Su <-diag(S_vec)
