@@ -220,10 +220,6 @@ p5 <- n2 / N_0_90[2]
 
 props <- c(p1, p2, p3, p4, p5)
 
-# Adjust susceptible estimates to the demographic age groups for analysis
-SW <- adapt_susc(M = SW_70, age_groups = age_breaks, dates = w_dates, proportions = props)
-SW_low <- adapt_susc(M = SW_70_low, age_groups = age_breaks, dates = w_dates, proportions = props)
-SW_up <- adapt_susc(M = SW_70_up, age_groups = age_breaks, dates = w_dates, proportions = props)
 
 # EPIDEMIOLOGICAL ASSUMPTION-----
 # Set epidemiological parameters using posterior mean values from Abrams et al.
@@ -259,6 +255,10 @@ H <- diag(Hinf_vec)
 nbreaks <- length(age_breaks)
 I <- diag(rep(1, nbreaks))  # Identity matrix used in matrix operations
 
+# Adjust susceptible estimates to the demographic age groups for analysis
+SW <- adapt_susc(M = SW_70, age_groups = age_breaks, dates = w_dates, proportions = props)
+SW_low <- adapt_susc(M = SW_70_low, age_groups = age_breaks, dates = w_dates, proportions = props)
+SW_up <- adapt_susc(M = SW_70_up, age_groups = age_breaks, dates = w_dates, proportions = props)
 
 
 # PRE-PANDEMIC CONTACT DATA
