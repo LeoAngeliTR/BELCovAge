@@ -133,6 +133,42 @@ w_dates_end <- w_dates_end[1:last_date]
 w_dates <- w_dates[1:last_date]
 w_dates <- w_dates[w_dates <= sm_dates[length(sm_dates)]]  # Filter to include dates not beyond the last simulation date
 
+# EPIDEMIOLOGICAL ASSUMPTIONS-----
+# Set epidemiological parameters using posterior mean values from Abrams et al.
+# This configuration specifically mimics the age distribution system of schools in Belgium (case2).
+
+params <- set_epi_params("case2")  # Retrieve parameters for the specified epidemiological setting
+age_breaks <- params$Age          # Age intervals for epidemiological data
+Asusc_vec <- params$A             # Age-specific susceptibility to infection
+Hinf_vec <- params$H              # Age-specific infectiousness
+p <- params$p_asym                # Age-specific proportion of asymptomatic infections
+phi_0 <- params$phi_0             # Age-specific proportion of mildly symptomatic infections
+omega_1 <- params$omega_1         # Removal rate for severe symptoms
+p_mask <- params$p_mask           # Age-specific mask usage rates
+prop_ratio <- 0.51                # Infectiousness ratio (Symptomatic to Asymptomatic)
+gamma <- 0.729                    # Removal rate for exposed individuals
+theta <- 0.475                    # Removal rate for pre-symptomatic individuals
+sigma1 <- 0.24                    # Removal rate for asymptomatic infections
+sigma2 <- 0.756                   # Recovery rate for mildly symptomatic infections
+
+# Construct age-specific vectors and matrices for disease progression and transmission
+Sigma <- sigma2 * phi_0           # Recovery rate matrix for mildly symptomatic individuals
+Psi <- sigma2 * (1 - phi_0)       # Progression rate matrix from symptomatic to more severe stages
+
+## Q-SUSCEPTIBILITY
+# Construct a diagonal matrix for age-specific susceptibility
+A <- diag(Asusc_vec)
+
+## Q-INFECTIVITY
+# Construct a diagonal matrix for age-specific infectivity
+H <- diag(Hinf_vec)
+
+# Setup an identity matrix for model operations
+nbreaks <- length(age_breaks)
+I <- diag(rep(1, nbreaks))  # Identity matrix used in matrix operations
+
+
+
 # SUSCEPTIBLE MATRIX----
 # Construct matrices containing estimated susceptibles S(s_ij) for each age group i during wave j.
 # Average across all iterations to compute the mean value s_ij.
@@ -220,40 +256,6 @@ p5 <- n2 / N_0_90[2]
 
 props <- c(p1, p2, p3, p4, p5)
 
-
-# EPIDEMIOLOGICAL ASSUMPTION-----
-# Set epidemiological parameters using posterior mean values from Abrams et al.
-# This configuration specifically mimics the age distribution system of schools in Belgium (case2).
-
-params <- set_epi_params("case2")  # Retrieve parameters for the specified epidemiological setting
-age_breaks <- params$Age          # Age intervals for epidemiological data
-Asusc_vec <- params$A             # Age-specific susceptibility to infection
-Hinf_vec <- params$H              # Age-specific infectiousness
-p <- params$p_asym                # Age-specific proportion of asymptomatic infections
-phi_0 <- params$phi_0             # Age-specific proportion of mildly symptomatic infections
-omega_1 <- params$omega_1         # Removal rate for severe symptoms
-p_mask <- params$p_mask           # Age-specific mask usage rates
-prop_ratio <- 0.51                # Infectiousness ratio (Symptomatic to Asymptomatic)
-gamma <- 0.729                    # Removal rate for exposed individuals
-theta <- 0.475                    # Removal rate for pre-symptomatic individuals
-sigma1 <- 0.24                    # Removal rate for asymptomatic infections
-sigma2 <- 0.756                   # Recovery rate for mildly symptomatic infections
-
-# Construct age-specific vectors and matrices for disease progression and transmission
-Sigma <- sigma2 * phi_0           # Recovery rate matrix for mildly symptomatic individuals
-Psi <- sigma2 * (1 - phi_0)       # Progression rate matrix from symptomatic to more severe stages
-
-## Q-SUSCEPTIBILITY
-# Construct a diagonal matrix for age-specific susceptibility
-A <- diag(Asusc_vec)
-
-## Q-INFECTIVITY
-# Construct a diagonal matrix for age-specific infectivity
-H <- diag(Hinf_vec)
-
-# Setup an identity matrix for model operations
-nbreaks <- length(age_breaks)
-I <- diag(rep(1, nbreaks))  # Identity matrix used in matrix operations
 
 # Adjust susceptible estimates to the demographic age groups for analysis
 SW <- adapt_susc(M = SW_70, age_groups = age_breaks, dates = w_dates, proportions = props)
