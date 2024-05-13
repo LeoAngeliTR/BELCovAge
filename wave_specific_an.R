@@ -55,7 +55,8 @@ ngms <- vector(mode = "list", length = length(wrange))
 c_asym <- vector(mode = "list", length = length(wrange))
 c_sym <- vector(mode = "list", length = length(wrange))
 w1_list <- vector(mode = "list", length = length(wrange))
-v1_list <- vector(mode = "list", length = length(wrange))
+v1_list <- vector(mode = "list", length = length(range))
+Susc_list<- vector(mode = "list", length = length(wrange))
 S_tot_index <- vector(mode = "list", length = length(wrange))
 S_tot_index_mid <- vector(mode = "list", length = length(wrange))
 
@@ -128,6 +129,7 @@ for(wave in wrange){
     Susc <- c(mean(SW[,wave][1:3]), mean(SW[,wave][4:5]), mean(SW[,wave][6:7]), mean(SW[,wave][8:9])) 
   }
   S_vec <- S_vec * (!R_t) + Susc * R_t  # Update susceptible vector dynamically based on R_t flag
+  Susc_list[[cicle]] <- Susc
   
   # Load previously evaluated contact matrices ensuring reciprocity
   fname <- "./data/raw_contact_list.rds"
@@ -256,6 +258,7 @@ for(wave in wrange){
   #Overall sensitivity Index-----
   #upper bound for the magnitude of change in Rt,
   #produced by K perturbation
+  S_built_1 <- matrix(calc.sens(K_1),nbreaks,nbreaks,dimnames=di_names)
   S_tot_index[cicle]<-sqrt(sum(hadamard.prod(S_built_1,S_built_1))) 
   S_tot_index_mid[cicle]<-sqrt(sum(calc.sens(mid_point_KL)*calc.sens(mid_point_KL)))
   
@@ -282,7 +285,6 @@ print(new) # print in nice format
 
 #Sensitivity & Elasticity matrices (lists) - set to identity matrix the first 8 elements
 sens_list<- lapply(ngms, calc.sens)
-el_list <- list()
 el_list<- lapply(ngms, calc.el)
 
 
