@@ -55,13 +55,17 @@ stringency <- data_eu[data_eu$CountryName == 'Belgium',] %>%
   filter(!is.na(StringencyIndex_Average))
 stringency$date <- as.Date(as.character(stringency$Date), format = "%Y%m%d")
 
+#Load NPIs
+output='./data/'
+df_measures <- readRDS(paste0(output,"df_measures.rds"))
+
 # Load genomic surveillance data and vaccination data from local sources
 df_vocs <- readRDS("./data/df_vocs.rds")  # Genomic surveillance data
 df_vaccines_1st = readRDS("./data/df_vaccines_1stDose_1_43.rds")  # First dose vaccine data
 df_vaccines_2nd = readRDS("./data/df_vaccines_2ndDose_1_43.rds")  # Second dose vaccine data
 
 #### Styling for plots ####
-font <- "Gudea"  # Define the font for plots
+fam <- font <- "Gudea"  # Define the font for plots
 font_add_google(family = font, font, db_cache = TRUE)  # Add Google font
 fa_path <- systemfonts::font_info(family = "Font Awesome 6 Brands")[["path"]]
 font_add(family = "fa-brands", regular = fa_path)
