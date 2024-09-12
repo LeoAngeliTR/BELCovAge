@@ -7,7 +7,7 @@ Angeli, L., Caetano, C., Franco, N., Coletti, P., Faes, C., Molenberghs, G., Beu
 
 
 ## Overview
-This repository contains the R scripts and data necessary to replicate the findings of our longitudinal study on age-related heterogeneity in COVID-19 transmission across Belgium. This research is detailed in the preprint manuscript listed below, emphasizing different age groups' distinct roles during the pandemic.
+This repository contains the R scripts and data necessary to replicate the findings of our longitudinal study on age-related heterogeneity in COVID-19 transmission across Belgium. This research is detailed in the preprint manuscript above, emphasizing different age groups' distinct roles during the pandemic.
 
 ## System & Software Requirements
 - **R Version**: 4.3.0
