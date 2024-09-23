@@ -1,1 +1,0 @@
-This folder contains the data necessary to run the code "long_analysis_BE.R"
