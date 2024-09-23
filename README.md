@@ -7,7 +7,7 @@ Angeli, L., Caetano, C., Franco, N., Coletti, P., Faes, C., Molenberghs, G., Beu
 
 
 ## Overview
-This repository contains the R scripts and data necessary to replicate the findings of our longitudinal study on age-related heterogeneity in COVID-19 transmission across Belgium. This research is detailed in the preprint manuscript above, emphasizing different age groups' distinct roles during the pandemic.
+This repository contains the R scripts and data necessary to replicate the findings of our longitudinal study on age-related heterogeneity in COVID-19 transmission across Belgium. This research is detailed in the preprint manuscript cited above, emphasizing different age groups' distinct roles during the pandemic.
 
 ## System & Software Requirements
 - **R Version**: 4.3.0
@@ -18,7 +18,7 @@ These versions were used for the analysis, ensuring the reproducibility of the r
 ## Repository Contents
 
 ### Folders:
-- `data`: Contains the data needed to reproduce the analysis.
+- `data`: Contains the data needed to reproduce the analysis, including `sm_susc_last_calibration_2024.rds` which holds the simulated daily age-specific number of susceptible individuals throughout the study period (November 2020 to February 2022). All input data and model code required to perform these simulations are available in the GitHub repository [OCTA_COVID19](https://github.com/lwillem/OCTA_COVID19) and archived on Zenodo at https://zenodo.org/records/11031839.
 - `fatigue_correction`: Includes estimated effects of fatigue when filling out CoMix social contact surveys [3.].
 - `R`, `R_socialmix`: R scripts adapted from the SOCRATES project[1.] to handle Comix social contact data[2.].
 
@@ -38,7 +38,7 @@ These versions were used for the analysis, ensuring the reproducibility of the r
 [https://doi.org/10.1016/j.epidem.2021.100449]
 6. Willem, L., Abrams, S., Franco, N., Coletti, P., Libin, P.J., Wambua, J., Couvreur, S., André, E., Wenseleers, T., Mao, Z. and Torneri, A. The impact of quality-adjusted life years on evaluating COVID-19 mitigation strategies: lessons from age-specific vaccination roll-out and variants of concern in Belgium (2020-2022). BMC public health, 24(1), p.1171(2024).
 [https://doi.org/10.1186/s12889-024-18576-w]
-
+7. Social Contact Data Sharing Initiative. This initiative aims to facilitate using open-source data in infectious disease modeling through an online tool (RShiny app) for extracting and analyzing social contact patterns. Coordinated by members of the SIMID group (Hasselt University & University of Antwerp, Belgium) in collaboration with Sebastian Funk (London School of Hygiene and Tropical Medicine, UK). [Website Link](https://socialcontactdata.org/)
 ## How to Use
 To replicate the study results:
 1. Clone this repository.
